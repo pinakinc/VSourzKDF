@@ -1,5 +1,6 @@
 package com.VSourz.keyworddriven.framework.keywords;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -211,7 +212,7 @@ public class Keywords extends TestBase{
 	public static void expliciteWait() throws Exception {
 		try {
 			logger.info("Waiting for webElement..."+webElement.toString());
-			WebDriverWait wait = new WebDriverWait(driver, Integer.parseInt(Wait.getExplicitWait()));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(Wait.getExplicitWait())));
 			wait.until(ExpectedConditions.visibilityOf(getWebElement(webElement)));
 			logger.info("Element found..."+webElement.toString());
 		} catch (Throwable e) {
@@ -234,7 +235,7 @@ public class Keywords extends TestBase{
 	
 	public static String clickWhenReady(By locator, int timeout) {
 		WebElement element = null;
-		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 		element = wait.until(ExpectedConditions.elementToBeClickable(locator));
 		element.click();
 		return "Pass";
